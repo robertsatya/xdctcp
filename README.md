@@ -1,7 +1,7 @@
-Mofified Implementation of DCTCP
+Modified Implementation of DCTCP
 ================================
 ---
-##COntributors
+##Contributors
 * Piyush Anil Nahar
 * Ajeet Kumar
 * Harsha Aduri
