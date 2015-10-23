@@ -1,5 +1,5 @@
-Modified Implementation of DCTCP
-================================
+xDCTCP - Extended DCTCP
+========================
 ---
 ##Contributors
 * Piyush Anil Nahar
