@@ -38,7 +38,7 @@ CPP	= g++
 LINK	= $(CPP)
 LINK_SHLIB = gcc -shared
 MKDEP	= ./conf/mkdep
-TCLSH	= /home/ajeet/ns-allinone-2.35/bin/tclsh8.5
+TCLSH	= /usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/bin/tclsh8.5
 TCL2C	= ../tclcl-1.20/tcl2c++
 AR	= ar rc $(BLANK)
 
@@ -64,7 +64,7 @@ DEFINE	= -DTCP_DELAY_BIND_ALL -DNO_TK -DTCLCL_CLASSINSTVAR  -DNDEBUG -DLINUX_TCP
 INCLUDES = \
 	-I.  \
 	-I. \
-	-I/home/ajeet/ns-allinone-2.35/tclcl-1.20 -I/home/ajeet/ns-allinone-2.35/otcl-1.14 -I/home/ajeet/ns-allinone-2.35/include -I/home/ajeet/ns-allinone-2.35/include -I/home/ajeet/ns-allinone-2.35/include -I/usr/include/pcap \
+	-I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/tclcl-1.20 -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/otcl-1.14 -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/include -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/include -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/include -I/usr/include/pcap \
 	-I./tcp -I./sctp -I./common -I./link -I./queue \
 	-I./adc -I./apps -I./mac -I./mobile -I./trace \
 	-I./routing -I./tools -I./classifier -I./mcast \
@@ -76,7 +76,7 @@ INCLUDES = \
 
 
 LIB	= \
-	-L/home/ajeet/ns-allinone-2.35/tclcl-1.20 -ltclcl -L/home/ajeet/ns-allinone-2.35/otcl-1.14 -lotcl -L/home/ajeet/ns-allinone-2.35/lib -ltk8.5 -L/home/ajeet/ns-allinone-2.35/lib -ltcl8.5 \
+	-L/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/tclcl-1.20 -ltclcl -L/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/otcl-1.14 -lotcl -L/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/lib -ltk8.5 -L/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/lib -ltcl8.5 \
 	-lXext -lX11 \
 	 -lnsl -lpcap -ldl \
 	-lm -lm 

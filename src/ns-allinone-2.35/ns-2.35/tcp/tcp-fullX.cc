@@ -117,6 +117,7 @@ static const char rcsid[] =
 #include "flags.h"
 #include "random.h"
 #include "template.h"
+#include <fstream>
 
 #ifndef TRUE
 #define	TRUE 	1
@@ -2724,7 +2725,7 @@ void FullTcpXAgent::update_dctcp_alpha(Packet *pkt)
 	int ecnbit = hdr_flags::access(pkt)->ecnecho();
 	int ackno = hdr_tcp::access(pkt)->ackno();
 	int acked_bytes = ackno - highest_ack_; 
-
+        ofstream myf;
 	if (acked_bytes <= 0) 
 		acked_bytes = size_;	
 	dctcp_total += acked_bytes;
@@ -2742,7 +2743,9 @@ void FullTcpXAgent::update_dctcp_alpha(Packet *pkt)
 			temp_alpha = ((double) dctcp_marked) / dctcp_total;
 		else 
 			temp_alpha = 0.0;
-
+                myf.open("/tmp/ajk.txt", ios::app | ios::out);
+                myf << "g:  " << dctcp_g_ << "\n";
+                myf.close();
 		dctcp_alpha_ = (1 - dctcp_g_) * dctcp_alpha_ + dctcp_g_ * temp_alpha;
 		dctcp_marked = 0;
 		dctcp_total = 0;

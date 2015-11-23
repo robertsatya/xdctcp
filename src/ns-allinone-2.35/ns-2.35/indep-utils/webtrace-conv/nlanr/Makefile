@@ -49,10 +49,10 @@ prefix  = /usr/local
 BINDEST = /usr/local/bin
 
 CC = g++
-INCLUDE = -I. -I../../.. -I/home/ajeet/ns-allinone-2.35/tclcl-1.20 -I/home/ajeet/ns-allinone-2.35/otcl-1.14 -I/home/ajeet/ns-allinone-2.35/include -I/home/ajeet/ns-allinone-2.35/include -I/home/ajeet/ns-allinone-2.35/include -I/usr/include/pcap
+INCLUDE = -I. -I../../.. -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/tclcl-1.20 -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/otcl-1.14 -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/include -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/include -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/include -I/usr/include/pcap
 CFLAGS = -O2 -Wall -Wno-write-strings -DCPP_NAMESPACE=std
 LDFLAGS = 
-LIBS = -L/home/ajeet/ns-allinone-2.35/lib -ltcl8.5  -lnsl -lpcap -ldl -lm 
+LIBS = -L/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/lib -ltcl8.5  -lnsl -lpcap -ldl -lm 
 INSTALL = /usr/bin/install -c
 
 SRC = tr-stat.cc logparse.cc

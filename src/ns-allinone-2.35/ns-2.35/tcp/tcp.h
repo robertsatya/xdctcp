@@ -439,6 +439,7 @@ public:
 	int dctcp_;
 	double dctcp_alpha_;
 	double dctcp_g_;
+	double dctcp_nl_;
 
 	int cong_action_;	/* Congestion Action.  True to indicate
 				   that the sender responded to congestion. */

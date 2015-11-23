@@ -105,8 +105,10 @@ TcpXAgent::TcpXAgent()
 	bind("dctcp_", &dctcp_);
 	bind("dctcp_alpha_", &dctcp_alpha_);
 	bind("dctcp_g_", &dctcp_g_);
-#endif /* TCP_DELAY_BIND_ALL */
+        bind("dctcp_ns_", &dctcp_ns_);
 
+#endif /* TCP_DELAY_BIND_ALL */
+       
 }
 
 void
@@ -131,6 +133,8 @@ TcpXAgent::delay_bind_init_all()
 	delay_bind_init_one("dctcp_"); 
 	delay_bind_init_one("dctcp_alpha_");
 	delay_bind_init_one("dctcp_g_");
+
+	delay_bind_init_one("dctcp_ns_");
 
         delay_bind_init_one("SetCWRonRetransmit_");
         delay_bind_init_one("old_ecn_");
@@ -247,6 +251,7 @@ TcpXAgent::delay_bind_dispatch(const char *varName, const char *localName, TclOb
         if (delay_bind_bool(varName, localName, "dctcp_", &dctcp_, tracer)) return TCL_OK; 
 	if (delay_bind(varName, localName, "dctcp_alpha_", &dctcp_alpha_ , tracer)) return TCL_OK;
 	if (delay_bind(varName, localName, "dctcp_g_", &dctcp_g_ , tracer)) return TCL_OK;
+	if (delay_bind(varName, localName, "dctcp_ns_", &dctcp_ns_ , tracer)) return TCL_OK;
         if (delay_bind_bool(varName, localName, "SetCWRonRetransmit_", &SetCWRonRetransmit_, tracer)) return TCL_OK;
         if (delay_bind_bool(varName, localName, "old_ecn_", &old_ecn_ , tracer)) return TCL_OK;
         if (delay_bind_bool(varName, localName, "bugfix_ss_", &bugfix_ss_ , tracer)) return TCL_OK;
@@ -1253,7 +1258,7 @@ void TcpXAgent::opencwnd()
 void
 TcpXAgent::slowdown(int how)
 {
-  ofstream myf;
+        ofstream nso;
 	double decrease;  /* added for highspeed - sylvia */
 	double win, halfwin, decreasewin;
 	int slowstart = 0;
@@ -1312,11 +1317,11 @@ TcpXAgent::slowdown(int how)
 			ssthresh_ = (int) decreasewin;
 		}
 	else if (how & CLOSE_SSTHRESH_DCTCP) {
-    myf.open("/tmp/xmen.txt",  ios::app | ios::out);
+                nso.open("/tmp/ns_val.txt",  ios::app | ios::out);
 		//ssthresh_ = (int) ((1 - dctcp_alpha_/2.0) * windowd());
-		ssthresh_ = (int) ((1) * windowd());
-    myf << "hahahhahaha\n";
-    myf.close();
+		ssthresh_ = (int) ((1 - (dctcp_ns_ * dctcp_alpha_)) * windowd());
+                nso << "CLOSE_SSTHRESH ns: " << dctcp_ns_ <<"\n";
+                nso.close();
     }
         else if (how & THREE_QUARTER_SSTHRESH)
 		if (ssthresh_ < 3*cwnd_/4)
@@ -1328,11 +1333,11 @@ TcpXAgent::slowdown(int how)
 			cwnd_ = halfwin;
 		} else cwnd_ = decreasewin;
 	else if (how & CLOSE_CWND_DCTCP){
-    myf.open("/tmp/xmen.txt",  ios::app | ios::out);
+                nso.open("/tmp/ns_val.txt",  ios::app | ios::out);
 		//cwnd_ = (1 - dctcp_alpha_/2.0) * windowd();
-		cwnd_ = (1) * windowd();
-    myf << "lololololol\n";
-    myf.close();
+		cwnd_ = (1 - (dctcp_ns_ * dctcp_alpha_)) * windowd(); 
+                nso << "CLOSE_CWND ns: " << dctcp_ns_ <<"\n";
+                nso.close();
     }
         else if (how & CWND_HALF_WITH_MIN) {
 		// We have not thought about how non-standard TCPs, with

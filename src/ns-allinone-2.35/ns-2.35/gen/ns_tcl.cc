@@ -101,9 +101,9 @@ ns will fall back on running the first perl in your path.\\\n\
 The wrong version of perl may break the test suites.\\\n\
 Reconfigure and rebuild ns if this is a problem.\\\n\
 \"\n\
-checkout_executable TCLSH \"/home/ajeet/ns-allinone-2.35/bin/tclsh8.5\" tclsh \"\\\n\
+checkout_executable TCLSH \"/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/bin/tclsh8.5\" tclsh \"\\\n\
 When configured, ns found the right version of tclsh in\\\n\
-/home/ajeet/ns-allinone-2.35/bin/tclsh8.5\n\
+/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/bin/tclsh8.5\n\
 but it doesn't seem to be there anymore, so\\\n\
 ns will fall back on running the first tclsh in your path.\\\n\
 The wrong version of tclsh may break the test suites.\\\n\
@@ -19646,6 +19646,8 @@ Agent/TCP set SetCWRonRetransmit_ true ; # added on 2005/06/19.\n\
 Agent/TCP set dctcp_ false;\n\
 Agent/TCP set dctcp_alpha_ 0.0;\n\
 Agent/TCP set dctcp_g_ 0.0625;\n\
+Agent/TCPX set dctcp_ns_ 0.5;\n\
+Agent/TCP set dctcp_nl_ 0.5;\n\
 \n\
 Agent/TCPX set seqno_ 0\n\
 Agent/TCPX set t_seqno_ 0\n\

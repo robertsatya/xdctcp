@@ -1030,6 +1030,8 @@ Agent/TCP set SetCWRonRetransmit_ true ; # added on 2005/06/19.
 Agent/TCP set dctcp_ false;
 Agent/TCP set dctcp_alpha_ 0.0;
 Agent/TCP set dctcp_g_ 0.0625;
+Agent/TCPX set dctcp_ns_ 0.5;
+Agent/TCP set dctcp_nl_ 0.5;
 
 Agent/TCPX set seqno_ 0
 Agent/TCPX set t_seqno_ 0

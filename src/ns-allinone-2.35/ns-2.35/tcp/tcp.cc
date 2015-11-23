@@ -46,6 +46,7 @@ static const char rcsid[] =
 #include "random.h"
 #include "basetrace.h"
 #include "hdr_qs.h"
+#include <fstream>
 
 int hdr_tcp::offset_;
 
@@ -104,6 +105,7 @@ TcpAgent::TcpAgent()
 	bind("dctcp_", &dctcp_);
 	bind("dctcp_alpha_", &dctcp_alpha_);
 	bind("dctcp_g_", &dctcp_g_);
+	bind("dctcp_nl_", &dctcp_nl_);
 #endif /* TCP_DELAY_BIND_ALL */
 
 }
@@ -129,6 +131,7 @@ TcpAgent::delay_bind_init_all()
 	// DCTCP
 	delay_bind_init_one("dctcp_"); 
 	delay_bind_init_one("dctcp_alpha_");
+	delay_bind_init_one("dctcp_nl_");
 	delay_bind_init_one("dctcp_g_");
 
         delay_bind_init_one("SetCWRonRetransmit_");
@@ -246,6 +249,7 @@ TcpAgent::delay_bind_dispatch(const char *varName, const char *localName, TclObj
         if (delay_bind_bool(varName, localName, "dctcp_", &dctcp_, tracer)) return TCL_OK; 
 	if (delay_bind(varName, localName, "dctcp_alpha_", &dctcp_alpha_ , tracer)) return TCL_OK;
 	if (delay_bind(varName, localName, "dctcp_g_", &dctcp_g_ , tracer)) return TCL_OK;
+	if (delay_bind(varName, localName, "dctcp_nl_", &dctcp_nl_ , tracer)) return TCL_OK;
         if (delay_bind_bool(varName, localName, "SetCWRonRetransmit_", &SetCWRonRetransmit_, tracer)) return TCL_OK;
         if (delay_bind_bool(varName, localName, "old_ecn_", &old_ecn_ , tracer)) return TCL_OK;
         if (delay_bind_bool(varName, localName, "bugfix_ss_", &bugfix_ss_ , tracer)) return TCL_OK;
@@ -1252,7 +1256,8 @@ void TcpAgent::opencwnd()
 void
 TcpAgent::slowdown(int how)
 {
-	double decrease;  /* added for highspeed - sylvia */
+	ofstream nlo;
+        double decrease;  /* added for highspeed - sylvia */
 	double win, halfwin, decreasewin;
 	int slowstart = 0;
 	++ncwndcuts_;
@@ -1309,8 +1314,12 @@ TcpAgent::slowdown(int how)
 		} else {
 			ssthresh_ = (int) decreasewin;
 		}
-	else if (how & CLOSE_SSTHRESH_DCTCP) 
-		ssthresh_ = (int) ((1 - dctcp_alpha_/2.0) * windowd());
+	else if (how & CLOSE_SSTHRESH_DCTCP){ 
+                nlo.open("/tmp/nl_val.txt", ios::app | ios::out);
+                nlo << "SSTHRESH nl: " << dctcp_nl_ << "\n";
+                nlo.close();
+		ssthresh_ = (int) ((1 - dctcp_alpha_*dctcp_nl_) * windowd());
+        }
         else if (how & THREE_QUARTER_SSTHRESH)
 		if (ssthresh_ < 3*cwnd_/4)
 			ssthresh_  = (int)(3*cwnd_/4);
@@ -1320,8 +1329,12 @@ TcpAgent::slowdown(int how)
 		if (first_decrease_ == 1 || slowstart || decrease_num_ == 0.5) {
 			cwnd_ = halfwin;
 		} else cwnd_ = decreasewin;
-	else if (how & CLOSE_CWND_DCTCP)
-		cwnd_ = (1 - dctcp_alpha_/2.0) * windowd();
+	else if (how & CLOSE_CWND_DCTCP){
+                nlo.open("/tmp/nl_val.txt", ios::app | ios::out);
+                nlo << "CWND nl: " << dctcp_nl_ << "\n";
+                nlo.close();
+		cwnd_ = (1 - dctcp_alpha_*dctcp_nl_) * windowd();
+        }
         else if (how & CWND_HALF_WITH_MIN) {
 		// We have not thought about how non-standard TCPs, with
 		// non-standard values of decrease_num_, should respond

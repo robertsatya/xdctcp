@@ -1,5 +1,5 @@
 /*2:*/
-#line 32 "gb_basic.w"
+#line 32 "./gb_basic.w"
 
 #include "gb_graph.h" 
 #define panic(c)  \
@@ -35,20 +35,20 @@ return NULL; \
 #define subst y.G \
 
 
-#line 34 "gb_basic.w"
+#line 34 "./gb_basic.w"
 
 /*3:*/
-#line 42 "gb_basic.w"
+#line 42 "./gb_basic.w"
 
 static Area working_storage;
 
 /*:3*//*5:*/
-#line 68 "gb_basic.w"
+#line 68 "./gb_basic.w"
 
 static char buffer[BUF_SIZE];
 
 /*:5*//*10:*/
-#line 226 "gb_basic.w"
+#line 226 "./gb_basic.w"
 
 static long nn[MAX_D+1];
 static long wr[MAX_D+1];
@@ -57,16 +57,16 @@ static long sig[MAX_D+2];
 static long xx[MAX_D+1],yy[MAX_D+1];
 
 /*:10*//*51:*/
-#line 1036 "gb_basic.w"
+#line 1036 "./gb_basic.w"
 
 static char*short_imap= "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ\
 abcdefghijklmnopqrstuvwxyz_^~&@,;.:?!%#$+-*/|<=>()[]{}`'";
 
 /*:51*/
-#line 35 "gb_basic.w"
+#line 35 "./gb_basic.w"
 
 /*8:*/
-#line 175 "gb_basic.w"
+#line 175 "./gb_basic.w"
 
 Graph*board(n1,n2,n3,n4,piece,wrap,directed)
 long n1,n2,n3,n4;
@@ -74,7 +74,7 @@ long piece;
 long wrap;
 long directed;
 {/*9:*/
-#line 198 "gb_basic.w"
+#line 198 "./gb_basic.w"
 
 Graph*new_graph;
 register long i,j,k;
@@ -83,13 +83,13 @@ register Vertex*v;
 register long s;
 
 /*:9*/
-#line 181 "gb_basic.w"
+#line 181 "./gb_basic.w"
 
 long n;
 long p;
 long l;
 /*11:*/
-#line 233 "gb_basic.w"
+#line 233 "./gb_basic.w"
 
 if(piece==0)piece= 1;
 if(n1<=0){n1= n2= 8;n3= 0;}
@@ -106,26 +106,26 @@ else{nn[4]= n4;d= 4;goto done;}
 }
 if(d==0){d= k-1;goto done;}
 /*12:*/
-#line 255 "gb_basic.w"
+#line 255 "./gb_basic.w"
 
-if(d>MAX_D)panic(bad_specs);
+if(d> MAX_D)panic(bad_specs);
 for(j= 1;k<=d;j++,k++)nn[k]= nn[j];
 
 /*:12*/
-#line 248 "gb_basic.w"
+#line 248 "./gb_basic.w"
 ;
 done:
 
 /*:11*/
-#line 185 "gb_basic.w"
+#line 185 "./gb_basic.w"
 ;
 /*13:*/
-#line 265 "gb_basic.w"
+#line 265 "./gb_basic.w"
 
 {float nnn;
 for(n= 1,nnn= 1.0,j= 1;j<=d;j++){
 nnn*= (float)nn[j];
-if(nnn>MAX_NNN)panic(very_bad_specs);
+if(nnn> MAX_NNN)panic(very_bad_specs);
 n*= nn[j];
 }
 new_graph= gb_new_graph(n);
@@ -135,7 +135,7 @@ sprintf(new_graph->id,"board(%ld,%ld,%ld,%ld,%ld,%ld,%d)",
 n1,n2,n3,n4,piece,wrap,directed?1:0);
 strcpy(new_graph->util_types,"ZZZIIIZZZZZZZZ");
 /*14:*/
-#line 294 "gb_basic.w"
+#line 294 "./gb_basic.w"
 
 {register char*q;
 nn[0]= xx[0]= xx[1]= xx[2]= xx[3]= 0;
@@ -155,18 +155,18 @@ xx[k]++;
 }
 
 /*:14*/
-#line 278 "gb_basic.w"
+#line 278 "./gb_basic.w"
 ;
 }
 
 /*:13*/
-#line 186 "gb_basic.w"
+#line 186 "./gb_basic.w"
 ;
 /*15:*/
-#line 322 "gb_basic.w"
+#line 322 "./gb_basic.w"
 
 /*16:*/
-#line 341 "gb_basic.w"
+#line 341 "./gb_basic.w"
 
 {register long w= wrap;
 for(k= 1;k<=d;k++,w>>= 1){
@@ -177,15 +177,15 @@ sig[0]= del[0]= sig[d+1]= 0;
 }
 
 /*:16*/
-#line 323 "gb_basic.w"
+#line 323 "./gb_basic.w"
 ;
 p= piece;
 if(p<0)p= -p;
 while(1){
 /*17:*/
-#line 353 "gb_basic.w"
+#line 353 "./gb_basic.w"
 
-for(k= d;sig[k]+(del[k]+1)*(del[k]+1)>p;k--)del[k]= 0;
+for(k= d;sig[k]+(del[k]+1)*(del[k]+1)> p;k--)del[k]= 0;
 if(k==0)break;
 del[k]++;
 sig[k+1]= sig[k]+del[k]*del[k];
@@ -193,21 +193,21 @@ for(k++;k<=d;k++)sig[k+1]= sig[k];
 if(sig[d+1]<p)continue;
 
 /*:17*/
-#line 327 "gb_basic.w"
+#line 327 "./gb_basic.w"
 ;
 while(1){
 /*19:*/
-#line 369 "gb_basic.w"
+#line 369 "./gb_basic.w"
 
 for(k= 1;k<=d;k++)xx[k]= 0;
 for(v= new_graph->vertices;;v++){
 /*20:*/
-#line 388 "gb_basic.w"
+#line 388 "./gb_basic.w"
 
 for(k= 1;k<=d;k++)yy[k]= xx[k]+del[k];
 for(l= 1;;l++){
 /*22:*/
-#line 406 "gb_basic.w"
+#line 406 "./gb_basic.w"
 
 for(k= 1;k<=d;k++){
 if(yy[k]<0){
@@ -220,10 +220,10 @@ do yy[k]-= nn[k];while(yy[k]>=nn[k]);
 }
 
 /*:22*/
-#line 391 "gb_basic.w"
+#line 391 "./gb_basic.w"
 ;
 if(piece<0)/*21:*/
-#line 399 "gb_basic.w"
+#line 399 "./gb_basic.w"
 
 {
 for(k= 1;k<=d;k++)if(yy[k]!=xx[k])goto unequal;
@@ -232,25 +232,25 @@ unequal:;
 }
 
 /*:21*/
-#line 392 "gb_basic.w"
+#line 392 "./gb_basic.w"
 ;
 /*23:*/
-#line 417 "gb_basic.w"
+#line 417 "./gb_basic.w"
 
 for(k= 2,j= yy[1];k<=d;k++)j= nn[k]*j+yy[k];
 if(directed)gb_new_arc(v,new_graph->vertices+j,l);
 else gb_new_edge(v,new_graph->vertices+j,l);
 
 /*:23*/
-#line 393 "gb_basic.w"
+#line 393 "./gb_basic.w"
 ;
-if(piece>0)goto no_more;
+if(piece> 0)goto no_more;
 for(k= 1;k<=d;k++)yy[k]+= del[k];
 }
 no_more:
 
 /*:20*/
-#line 372 "gb_basic.w"
+#line 372 "./gb_basic.w"
 ;
 for(k= d;xx[k]+1==nn[k];k--)xx[k]= 0;
 if(k==0)break;
@@ -258,23 +258,23 @@ xx[k]++;
 }
 
 /*:19*/
-#line 329 "gb_basic.w"
+#line 329 "./gb_basic.w"
 ;
 /*18:*/
-#line 362 "gb_basic.w"
+#line 362 "./gb_basic.w"
 
 for(k= d;del[k]<=0;k--)del[k]= -del[k];
 if(sig[k]==0)break;
 del[k]= -del[k];
 
 /*:18*/
-#line 331 "gb_basic.w"
+#line 331 "./gb_basic.w"
 ;
 }
 }
 
 /*:15*/
-#line 187 "gb_basic.w"
+#line 187 "./gb_basic.w"
 ;
 if(gb_trouble_code){
 gb_recycle(new_graph);
@@ -284,14 +284,14 @@ return new_graph;
 }
 
 /*:8*//*26:*/
-#line 492 "gb_basic.w"
+#line 492 "./gb_basic.w"
 
 Graph*simplex(n,n0,n1,n2,n3,n4,directed)
 unsigned long n;
 long n0,n1,n2,n3,n4;
 long directed;
 {/*9:*/
-#line 198 "gb_basic.w"
+#line 198 "./gb_basic.w"
 
 Graph*new_graph;
 register long i,j,k;
@@ -300,30 +300,30 @@ register Vertex*v;
 register long s;
 
 /*:9*/
-#line 497 "gb_basic.w"
+#line 497 "./gb_basic.w"
 
 /*27:*/
-#line 508 "gb_basic.w"
+#line 508 "./gb_basic.w"
 
 if(n0==0)n0= -2;
 if(n0<0){k= 2;nn[0]= n;d= -n0;n1= n2= n3= n4= 0;}
 else{
-if(n0>n)n0= n;
+if(n0> n)n0= n;
 nn[0]= n0;
 if(n1<=0){k= 2;d= -n1;n2= n3= n4= 0;}
 else{
-if(n1>n)n1= n;
+if(n1> n)n1= n;
 nn[1]= n1;
 if(n2<=0){k= 3;d= -n2;n3= n4= 0;}
 else{
-if(n2>n)n2= n;
+if(n2> n)n2= n;
 nn[2]= n2;
 if(n3<=0){k= 4;d= -n3;n4= 0;}
 else{
-if(n3>n)n3= n;
+if(n3> n)n3= n;
 nn[3]= n3;
 if(n4<=0){k= 5;d= -n4;}
-else{if(n4>n)n4= n;
+else{if(n4> n)n4= n;
 nn[4]= n4;d= 4;goto done;}
 }
 }
@@ -332,24 +332,24 @@ nn[4]= n4;d= 4;goto done;}
 if(d==0){d= k-2;goto done;}
 nn[k-1]= nn[0];
 /*12:*/
-#line 255 "gb_basic.w"
+#line 255 "./gb_basic.w"
 
-if(d>MAX_D)panic(bad_specs);
+if(d> MAX_D)panic(bad_specs);
 for(j= 1;k<=d;j++,k++)nn[k]= nn[j];
 
 /*:12*/
-#line 535 "gb_basic.w"
+#line 535 "./gb_basic.w"
 ;
 done:
 
 /*:27*/
-#line 498 "gb_basic.w"
+#line 498 "./gb_basic.w"
 ;
 /*28:*/
-#line 538 "gb_basic.w"
+#line 538 "./gb_basic.w"
 
 /*29:*/
-#line 549 "gb_basic.w"
+#line 549 "./gb_basic.w"
 
 {long nverts;
 register long*coef= gb_typed_alloc(n+1,long,working_storage);
@@ -358,20 +358,20 @@ for(k= 0;k<=nn[0];k++)coef[k]= 1;
 
 for(j= 1;j<=d;j++)
 /*30:*/
-#line 571 "gb_basic.w"
+#line 571 "./gb_basic.w"
 
 {
 for(k= n,i= n-nn[j]-1;i>=0;k--,i--)coef[k]-= coef[i];
 s= 1;
 for(k= 1;k<=n;k++){
 s+= coef[k];
-if(s>1000000000)panic(very_bad_specs);
+if(s> 1000000000)panic(very_bad_specs);
 coef[k]= s;
 }
 }
 
 /*:30*/
-#line 556 "gb_basic.w"
+#line 556 "./gb_basic.w"
 ;
 nverts= coef[n];
 gb_free(working_storage);
@@ -381,17 +381,17 @@ panic(no_room);
 }
 
 /*:29*/
-#line 540 "gb_basic.w"
+#line 540 "./gb_basic.w"
 ;
 sprintf(new_graph->id,"simplex(%lu,%ld,%ld,%ld,%ld,%ld,%d)",
 n,n0,n1,n2,n3,n4,directed?1:0);
 strcpy(new_graph->util_types,"VVZIIIZZZZZZZZ");
 
 /*:28*/
-#line 499 "gb_basic.w"
+#line 499 "./gb_basic.w"
 ;
 /*31:*/
-#line 599 "gb_basic.w"
+#line 599 "./gb_basic.w"
 
 v= new_graph->vertices;
 yy[d+1]= 0;sig[0]= n;
@@ -400,7 +400,7 @@ if(yy[0]>=n){
 k= 0;xx[0]= (yy[1]>=n?0:n-yy[1]);
 while(1){
 /*32:*/
-#line 619 "gb_basic.w"
+#line 619 "./gb_basic.w"
 
 for(s= sig[k]-xx[k],k++;k<=d;s-= xx[k],k++){
 sig[k]= s;
@@ -410,10 +410,10 @@ else xx[k]= s-yy[k+1];
 if(s!=0)panic(impossible+1)
 
 /*:32*/
-#line 606 "gb_basic.w"
+#line 606 "./gb_basic.w"
 ;
 /*34:*/
-#line 646 "gb_basic.w"
+#line 646 "./gb_basic.w"
 
 {register char*p= buffer;
 for(k= 0;k<=d;k++){
@@ -425,12 +425,12 @@ v->x.I= xx[0];v->y.I= xx[1];v->z.I= xx[2];
 }
 
 /*:34*/
-#line 607 "gb_basic.w"
+#line 607 "./gb_basic.w"
 ;
 hash_in(v);
 
 /*35:*/
-#line 661 "gb_basic.w"
+#line 661 "./gb_basic.w"
 
 for(j= 0;j<d;j++)
 if(xx[j]){register Vertex*u;
@@ -452,11 +452,11 @@ xx[j]++;
 }
 
 /*:35*/
-#line 610 "gb_basic.w"
+#line 610 "./gb_basic.w"
 ;
 v++;
 /*33:*/
-#line 630 "gb_basic.w"
+#line 630 "./gb_basic.w"
 
 for(k= d-1;;k--){
 if(xx[k]<sig[k]&&xx[k]<nn[k])break;
@@ -465,7 +465,7 @@ if(k==0)goto last;
 xx[k]++;
 
 /*:33*/
-#line 613 "gb_basic.w"
+#line 613 "./gb_basic.w"
 ;
 }
 }
@@ -473,7 +473,7 @@ last:if(v!=new_graph->vertices+new_graph->n)
 panic(impossible);
 
 /*:31*/
-#line 500 "gb_basic.w"
+#line 500 "./gb_basic.w"
 ;
 if(gb_trouble_code){
 gb_recycle(new_graph);
@@ -483,7 +483,7 @@ return new_graph;
 }
 
 /*:26*//*37:*/
-#line 731 "gb_basic.w"
+#line 731 "./gb_basic.w"
 
 Graph*subsets(n,n0,n1,n2,n3,n4,size_bits,directed)
 unsigned long n;
@@ -491,7 +491,7 @@ long n0,n1,n2,n3,n4;
 unsigned long size_bits;
 long directed;
 {/*9:*/
-#line 198 "gb_basic.w"
+#line 198 "./gb_basic.w"
 
 Graph*new_graph;
 register long i,j,k;
@@ -500,30 +500,30 @@ register Vertex*v;
 register long s;
 
 /*:9*/
-#line 737 "gb_basic.w"
+#line 737 "./gb_basic.w"
 
 /*27:*/
-#line 508 "gb_basic.w"
+#line 508 "./gb_basic.w"
 
 if(n0==0)n0= -2;
 if(n0<0){k= 2;nn[0]= n;d= -n0;n1= n2= n3= n4= 0;}
 else{
-if(n0>n)n0= n;
+if(n0> n)n0= n;
 nn[0]= n0;
 if(n1<=0){k= 2;d= -n1;n2= n3= n4= 0;}
 else{
-if(n1>n)n1= n;
+if(n1> n)n1= n;
 nn[1]= n1;
 if(n2<=0){k= 3;d= -n2;n3= n4= 0;}
 else{
-if(n2>n)n2= n;
+if(n2> n)n2= n;
 nn[2]= n2;
 if(n3<=0){k= 4;d= -n3;n4= 0;}
 else{
-if(n3>n)n3= n;
+if(n3> n)n3= n;
 nn[3]= n3;
 if(n4<=0){k= 5;d= -n4;}
-else{if(n4>n)n4= n;
+else{if(n4> n)n4= n;
 nn[4]= n4;d= 4;goto done;}
 }
 }
@@ -532,24 +532,24 @@ nn[4]= n4;d= 4;goto done;}
 if(d==0){d= k-2;goto done;}
 nn[k-1]= nn[0];
 /*12:*/
-#line 255 "gb_basic.w"
+#line 255 "./gb_basic.w"
 
-if(d>MAX_D)panic(bad_specs);
+if(d> MAX_D)panic(bad_specs);
 for(j= 1;k<=d;j++,k++)nn[k]= nn[j];
 
 /*:12*/
-#line 535 "gb_basic.w"
+#line 535 "./gb_basic.w"
 ;
 done:
 
 /*:27*/
-#line 738 "gb_basic.w"
+#line 738 "./gb_basic.w"
 ;
 /*38:*/
-#line 748 "gb_basic.w"
+#line 748 "./gb_basic.w"
 
 /*29:*/
-#line 549 "gb_basic.w"
+#line 549 "./gb_basic.w"
 
 {long nverts;
 register long*coef= gb_typed_alloc(n+1,long,working_storage);
@@ -558,20 +558,20 @@ for(k= 0;k<=nn[0];k++)coef[k]= 1;
 
 for(j= 1;j<=d;j++)
 /*30:*/
-#line 571 "gb_basic.w"
+#line 571 "./gb_basic.w"
 
 {
 for(k= n,i= n-nn[j]-1;i>=0;k--,i--)coef[k]-= coef[i];
 s= 1;
 for(k= 1;k<=n;k++){
 s+= coef[k];
-if(s>1000000000)panic(very_bad_specs);
+if(s> 1000000000)panic(very_bad_specs);
 coef[k]= s;
 }
 }
 
 /*:30*/
-#line 556 "gb_basic.w"
+#line 556 "./gb_basic.w"
 ;
 nverts= coef[n];
 gb_free(working_storage);
@@ -581,7 +581,7 @@ panic(no_room);
 }
 
 /*:29*/
-#line 750 "gb_basic.w"
+#line 750 "./gb_basic.w"
 ;
 sprintf(new_graph->id,"subsets(%lu,%ld,%ld,%ld,%ld,%ld,0x%lx,%d)",
 n,n0,n1,n2,n3,n4,size_bits,directed?1:0);
@@ -589,10 +589,10 @@ strcpy(new_graph->util_types,"ZZZIIIZZZZZZZZ");
 
 
 /*:38*/
-#line 739 "gb_basic.w"
+#line 739 "./gb_basic.w"
 ;
 /*39:*/
-#line 758 "gb_basic.w"
+#line 758 "./gb_basic.w"
 
 v= new_graph->vertices;
 yy[d+1]= 0;sig[0]= n;
@@ -601,7 +601,7 @@ if(yy[0]>=n){
 k= 0;xx[0]= (yy[1]>=n?0:n-yy[1]);
 while(1){
 /*32:*/
-#line 619 "gb_basic.w"
+#line 619 "./gb_basic.w"
 
 for(s= sig[k]-xx[k],k++;k<=d;s-= xx[k],k++){
 sig[k]= s;
@@ -611,10 +611,10 @@ else xx[k]= s-yy[k+1];
 if(s!=0)panic(impossible+1)
 
 /*:32*/
-#line 765 "gb_basic.w"
+#line 765 "./gb_basic.w"
 ;
 /*34:*/
-#line 646 "gb_basic.w"
+#line 646 "./gb_basic.w"
 
 {register char*p= buffer;
 for(k= 0;k<=d;k++){
@@ -626,10 +626,10 @@ v->x.I= xx[0];v->y.I= xx[1];v->z.I= xx[2];
 }
 
 /*:34*/
-#line 766 "gb_basic.w"
+#line 766 "./gb_basic.w"
 ;
 /*40:*/
-#line 786 "gb_basic.w"
+#line 786 "./gb_basic.w"
 
 {register Vertex*u;
 for(u= new_graph->vertices;u<=v;u++){register char*p= u->name;
@@ -648,11 +648,11 @@ else gb_new_edge(u,v,1L);
 }
 
 /*:40*/
-#line 767 "gb_basic.w"
+#line 767 "./gb_basic.w"
 ;
 v++;
 /*33:*/
-#line 630 "gb_basic.w"
+#line 630 "./gb_basic.w"
 
 for(k= d-1;;k--){
 if(xx[k]<sig[k]&&xx[k]<nn[k])break;
@@ -661,7 +661,7 @@ if(k==0)goto last;
 xx[k]++;
 
 /*:33*/
-#line 770 "gb_basic.w"
+#line 770 "./gb_basic.w"
 ;
 }
 }
@@ -669,7 +669,7 @@ last:if(v!=new_graph->vertices+new_graph->n)
 panic(impossible);
 
 /*:39*/
-#line 740 "gb_basic.w"
+#line 740 "./gb_basic.w"
 ;
 if(gb_trouble_code){
 gb_recycle(new_graph);
@@ -679,14 +679,14 @@ return new_graph;
 }
 
 /*:37*//*43:*/
-#line 885 "gb_basic.w"
+#line 885 "./gb_basic.w"
 
 Graph*perms(n0,n1,n2,n3,n4,max_inv,directed)
 long n0,n1,n2,n3,n4;
 unsigned long max_inv;
 long directed;
 {/*9:*/
-#line 198 "gb_basic.w"
+#line 198 "./gb_basic.w"
 
 Graph*new_graph;
 register long i,j,k;
@@ -695,37 +695,37 @@ register Vertex*v;
 register long s;
 
 /*:9*/
-#line 890 "gb_basic.w"
+#line 890 "./gb_basic.w"
 
 register long n;
 /*44:*/
-#line 902 "gb_basic.w"
+#line 902 "./gb_basic.w"
 
 if(n0==0){n0= 1;n1= 0;}
 else if(n0<0){n1= n0;n0= 1;}
 n= BUF_SIZE;
 /*27:*/
-#line 508 "gb_basic.w"
+#line 508 "./gb_basic.w"
 
 if(n0==0)n0= -2;
 if(n0<0){k= 2;nn[0]= n;d= -n0;n1= n2= n3= n4= 0;}
 else{
-if(n0>n)n0= n;
+if(n0> n)n0= n;
 nn[0]= n0;
 if(n1<=0){k= 2;d= -n1;n2= n3= n4= 0;}
 else{
-if(n1>n)n1= n;
+if(n1> n)n1= n;
 nn[1]= n1;
 if(n2<=0){k= 3;d= -n2;n3= n4= 0;}
 else{
-if(n2>n)n2= n;
+if(n2> n)n2= n;
 nn[2]= n2;
 if(n3<=0){k= 4;d= -n3;n4= 0;}
 else{
-if(n3>n)n3= n;
+if(n3> n)n3= n;
 nn[3]= n3;
 if(n4<=0){k= 5;d= -n4;}
-else{if(n4>n)n4= n;
+else{if(n4> n)n4= n;
 nn[4]= n4;d= 4;goto done;}
 }
 }
@@ -734,21 +734,21 @@ nn[4]= n4;d= 4;goto done;}
 if(d==0){d= k-2;goto done;}
 nn[k-1]= nn[0];
 /*12:*/
-#line 255 "gb_basic.w"
+#line 255 "./gb_basic.w"
 
-if(d>MAX_D)panic(bad_specs);
+if(d> MAX_D)panic(bad_specs);
 for(j= 1;k<=d;j++,k++)nn[k]= nn[j];
 
 /*:12*/
-#line 535 "gb_basic.w"
+#line 535 "./gb_basic.w"
 ;
 done:
 
 /*:27*/
-#line 906 "gb_basic.w"
+#line 906 "./gb_basic.w"
 ;
 /*45:*/
-#line 913 "gb_basic.w"
+#line 913 "./gb_basic.w"
 
 {register long ss;
 for(k= 0,s= ss= 0;k<=d;ss+= s*nn[k],s+= nn[k],k++)
@@ -756,18 +756,18 @@ if(nn[k]>=BUF_SIZE)panic(bad_specs);
 
 if(s>=BUF_SIZE)panic(bad_specs+1);
 n= s;
-if(max_inv==0||max_inv>ss)max_inv= ss;
+if(max_inv==0||max_inv> ss)max_inv= ss;
 }
 
 /*:45*/
-#line 907 "gb_basic.w"
+#line 907 "./gb_basic.w"
 ;
 
 /*:44*/
-#line 892 "gb_basic.w"
+#line 892 "./gb_basic.w"
 ;
 /*46:*/
-#line 931 "gb_basic.w"
+#line 931 "./gb_basic.w"
 
 {long nverts;
 register long*coef= gb_typed_alloc(max_inv+1,long,working_storage);
@@ -775,22 +775,22 @@ if(gb_trouble_code)panic(no_room+1);
 coef[0]= 1;
 for(j= 1,s= nn[0];j<=d;s+= nn[j],j++)
 /*47:*/
-#line 957 "gb_basic.w"
+#line 957 "./gb_basic.w"
 
 for(k= 1;k<=nn[j];k++){register long ii;
 for(i= max_inv,ii= i-k-s;ii>=0;ii--,i--)coef[i]-= coef[ii];
 for(i= k,ii= 0;i<=max_inv;i++,ii++){
 coef[i]+= coef[ii];
-if(coef[i]>1000000000)panic(very_bad_specs+1);
+if(coef[i]> 1000000000)panic(very_bad_specs+1);
 }
 }
 
 /*:47*/
-#line 938 "gb_basic.w"
+#line 938 "./gb_basic.w"
 ;
 for(k= 1,nverts= 1;k<=max_inv;k++){
 nverts+= coef[k];
-if(nverts>1000000000)panic(very_bad_specs);
+if(nverts> 1000000000)panic(very_bad_specs);
 }
 gb_free(working_storage);
 new_graph= gb_new_graph(nverts);
@@ -802,15 +802,15 @@ strcpy(new_graph->util_types,"VVZZZZZZZZZZZZ");
 }
 
 /*:46*/
-#line 893 "gb_basic.w"
+#line 893 "./gb_basic.w"
 ;
 /*48:*/
-#line 979 "gb_basic.w"
+#line 979 "./gb_basic.w"
 
 {register long*xtab,*ytab,*ztab;
 long m= 0;
 /*49:*/
-#line 995 "gb_basic.w"
+#line 995 "./gb_basic.w"
 
 xtab= gb_typed_alloc(3*n+3,long,working_storage);
 if(gb_trouble_code){
@@ -820,34 +820,34 @@ ztab= ytab+(n+1);
 for(j= 0,k= 1,s= nn[0];;k++){
 xtab[k]= ztab[k]= j;
 if(k==s){
-if(++j>d)break;
+if(++j> d)break;
 else s+= nn[j];
 }
 }
 
 /*:49*/
-#line 982 "gb_basic.w"
+#line 982 "./gb_basic.w"
 ;
 v= new_graph->vertices;
 while(1){
 /*52:*/
-#line 1040 "gb_basic.w"
+#line 1040 "./gb_basic.w"
 
 {register char*p;register long*q;
-for(p= &buffer[n-1],q= &xtab[n];q>xtab;p--,q--)*p= short_imap[*q];
+for(p= &buffer[n-1],q= &xtab[n];q> xtab;p--,q--)*p= short_imap[*q];
 v->name= gb_save_string(buffer);
 hash_in(v);
 
 }
 
 /*:52*/
-#line 985 "gb_basic.w"
+#line 985 "./gb_basic.w"
 ;
 /*53:*/
-#line 1053 "gb_basic.w"
+#line 1053 "./gb_basic.w"
 
 for(j= 1;j<n;j++)
-if(xtab[j]>xtab[j+1]){register Vertex*u;
+if(xtab[j]> xtab[j+1]){register Vertex*u;
 
 buffer[j-1]= short_imap[xtab[j+1]];buffer[j]= short_imap[xtab[j]];
 u= hash_out(buffer);
@@ -858,15 +858,15 @@ buffer[j-1]= short_imap[xtab[j]];buffer[j]= short_imap[xtab[j+1]];
 }
 
 /*:53*/
-#line 986 "gb_basic.w"
+#line 986 "./gb_basic.w"
 ;
 v++;
 /*50:*/
-#line 1014 "gb_basic.w"
+#line 1014 "./gb_basic.w"
 
 for(k= n;k;k--){
 if(m<max_inv&&ytab[k]<k-1)
-if(ytab[k]<ytab[k-1]||ztab[k]>ztab[k-1])goto move;
+if(ytab[k]<ytab[k-1]||ztab[k]> ztab[k-1])goto move;
 if(ytab[k]){
 for(j= k-ytab[k];j<k;j++)xtab[j]= xtab[j+1];
 m-= ytab[k];
@@ -880,7 +880,7 @@ xtab[j]= xtab[j-1];xtab[j-1]= ztab[k];
 ytab[k]++;m++;
 
 /*:50*/
-#line 988 "gb_basic.w"
+#line 988 "./gb_basic.w"
 ;
 }
 last:if(v!=new_graph->vertices+new_graph->n)
@@ -889,7 +889,7 @@ gb_free(working_storage);
 }
 
 /*:48*/
-#line 894 "gb_basic.w"
+#line 894 "./gb_basic.w"
 ;
 if(gb_trouble_code){
 gb_recycle(new_graph);
@@ -899,7 +899,7 @@ return new_graph;
 }
 
 /*:43*//*55:*/
-#line 1097 "gb_basic.w"
+#line 1097 "./gb_basic.w"
 
 Graph*parts(n,max_parts,max_size,directed)
 unsigned long n;
@@ -907,7 +907,7 @@ unsigned long max_parts;
 unsigned long max_size;
 long directed;
 {/*9:*/
-#line 198 "gb_basic.w"
+#line 198 "./gb_basic.w"
 
 Graph*new_graph;
 register long i,j,k;
@@ -916,13 +916,13 @@ register Vertex*v;
 register long s;
 
 /*:9*/
-#line 1103 "gb_basic.w"
+#line 1103 "./gb_basic.w"
 
-if(max_parts==0||max_parts>n)max_parts= n;
-if(max_size==0||max_size>n)max_size= n;
-if(max_parts>MAX_D)panic(bad_specs);
+if(max_parts==0||max_parts> n)max_parts= n;
+if(max_size==0||max_size> n)max_size= n;
+if(max_parts> MAX_D)panic(bad_specs);
 /*56:*/
-#line 1121 "gb_basic.w"
+#line 1121 "./gb_basic.w"
 
 {long nverts;
 register long*coef= gb_typed_alloc(n+1,long,working_storage);
@@ -932,7 +932,7 @@ for(k= 1;k<=max_parts;k++){
 for(j= n,i= n-k-max_size;i>=0;i--,j--)coef[j]-= coef[i];
 for(j= k,i= 0;j<=n;i++,j++){
 coef[j]+= coef[i];
-if(coef[j]>1000000000)panic(very_bad_specs);
+if(coef[j]> 1000000000)panic(very_bad_specs);
 }
 }
 nverts= coef[n];
@@ -946,19 +946,19 @@ strcpy(new_graph->util_types,"VVZZZZZZZZZZZZ");
 }
 
 /*:56*/
-#line 1107 "gb_basic.w"
+#line 1107 "./gb_basic.w"
 ;
 /*57:*/
-#line 1151 "gb_basic.w"
+#line 1151 "./gb_basic.w"
 
 v= new_graph->vertices;
 xx[0]= max_size;sig[1]= n;
-for(k= max_parts,s= 1;k>0;k--,s++)yy[k]= s;
+for(k= max_parts,s= 1;k> 0;k--,s++)yy[k]= s;
 if(max_size*max_parts>=n){
 k= 1;xx[1]= (n-1)/max_parts+1;
 while(1){
 /*58:*/
-#line 1169 "gb_basic.w"
+#line 1169 "./gb_basic.w"
 
 for(s= sig[k]-xx[k],k++;s;k++){
 sig[k]= s;
@@ -968,10 +968,10 @@ s-= xx[k];
 d= k-1;
 
 /*:58*/
-#line 1158 "gb_basic.w"
+#line 1158 "./gb_basic.w"
 ;
 /*60:*/
-#line 1188 "gb_basic.w"
+#line 1188 "./gb_basic.w"
 
 {register char*p= buffer;
 for(k= 1;k<=d;k++){
@@ -984,10 +984,10 @@ hash_in(v);
 }
 
 /*:60*/
-#line 1159 "gb_basic.w"
+#line 1159 "./gb_basic.w"
 ;
 /*61:*/
-#line 1205 "gb_basic.w"
+#line 1205 "./gb_basic.w"
 
 if(d<max_parts){
 xx[d+1]= 0;
@@ -995,13 +995,13 @@ for(j= 1;j<=d;j++){
 if(xx[j]!=xx[j+1]){long a,b;
 for(b= xx[j]/2,a= xx[j]-b;b;a++,b--)
 /*62:*/
-#line 1224 "gb_basic.w"
+#line 1224 "./gb_basic.w"
 
 {register Vertex*u;
 register char*p= buffer;
-for(k= j+1;xx[k]>a;k++)nn[k-1]= xx[k];
+for(k= j+1;xx[k]> a;k++)nn[k-1]= xx[k];
 nn[k-1]= a;
-for(;xx[k]>b;k++)nn[k]= xx[k];
+for(;xx[k]> b;k++)nn[k]= xx[k];
 nn[k]= b;
 for(;k<=d;k++)nn[k+1]= xx[k];
 for(k= 1;k<=d+1;k++){
@@ -1015,7 +1015,7 @@ else gb_new_edge(v,u,1L);
 }
 
 /*:62*/
-#line 1213 "gb_basic.w"
+#line 1213 "./gb_basic.w"
 ;
 }
 nn[j]= xx[j];
@@ -1023,11 +1023,11 @@ nn[j]= xx[j];
 }
 
 /*:61*/
-#line 1160 "gb_basic.w"
+#line 1160 "./gb_basic.w"
 ;
 v++;
 /*59:*/
-#line 1180 "gb_basic.w"
+#line 1180 "./gb_basic.w"
 
 if(d==1)goto last;
 for(k= d-1;;k--){
@@ -1037,7 +1037,7 @@ if(k==1)goto last;
 xx[k]++;
 
 /*:59*/
-#line 1163 "gb_basic.w"
+#line 1163 "./gb_basic.w"
 ;
 }
 }
@@ -1045,7 +1045,7 @@ last:if(v!=new_graph->vertices+new_graph->n)
 panic(impossible);
 
 /*:57*/
-#line 1108 "gb_basic.w"
+#line 1108 "./gb_basic.w"
 ;
 if(gb_trouble_code){
 gb_recycle(new_graph);
@@ -1056,14 +1056,14 @@ return new_graph;
 }
 
 /*:55*//*64:*/
-#line 1289 "gb_basic.w"
+#line 1289 "./gb_basic.w"
 
 Graph*binary(n,max_height,directed)
 unsigned long n;
 unsigned long max_height;
 long directed;
 {/*9:*/
-#line 198 "gb_basic.w"
+#line 198 "./gb_basic.w"
 
 Graph*new_graph;
 register long i,j,k;
@@ -1072,21 +1072,21 @@ register Vertex*v;
 register long s;
 
 /*:9*/
-#line 1294 "gb_basic.w"
+#line 1294 "./gb_basic.w"
 
-if(2*n+2>BUF_SIZE)panic(bad_specs);
-if(max_height==0||max_height>n)max_height= n;
-if(max_height>30)panic(very_bad_specs);
+if(2*n+2> BUF_SIZE)panic(bad_specs);
+if(max_height==0||max_height> n)max_height= n;
+if(max_height> 30)panic(very_bad_specs);
 /*65:*/
-#line 1322 "gb_basic.w"
+#line 1322 "./gb_basic.w"
 
 {long nverts;
 if(n>=20&&max_height>=6)/*66:*/
-#line 1347 "gb_basic.w"
+#line 1347 "./gb_basic.w"
 
 {register float ss;
 d= (1L<<max_height)-1-n;
-if(d>8)panic(bad_specs+1);
+if(d> 8)panic(bad_specs+1);
 if(d<0)nverts= 0;
 else{
 nn[0]= nn[1]= 1;
@@ -1094,7 +1094,7 @@ for(k= 2;k<=d;k++)nn[k]= 0;
 for(j= 2;j<=max_height;j++){
 for(k= d;k;k--){
 for(ss= 0.0,i= k;i>=0;i--)ss+= ((float)nn[i])*((float)nn[k-i]);
-if(ss>MAX_NNN)panic(very_bad_specs+1);
+if(ss> MAX_NNN)panic(very_bad_specs+1);
 for(s= 0,i= k;i>=0;i--)s+= nn[i]*nn[k-i];
 nn[k]= s;
 }
@@ -1106,7 +1106,7 @@ nverts= nn[d];
 }
 
 /*:66*/
-#line 1324 "gb_basic.w"
+#line 1324 "./gb_basic.w"
 
 else{
 nn[0]= nn[1]= 1;
@@ -1127,14 +1127,14 @@ strcpy(new_graph->util_types,"VVZZZZZZZZZZZZ");
 }
 
 /*:65*/
-#line 1298 "gb_basic.w"
+#line 1298 "./gb_basic.w"
 ;
 /*67:*/
-#line 1408 "gb_basic.w"
+#line 1408 "./gb_basic.w"
 
 {register long*xtab,*ytab,*ltab,*stab;
 /*68:*/
-#line 1428 "gb_basic.w"
+#line 1428 "./gb_basic.w"
 
 xtab= gb_typed_alloc(8*n+4,long,working_storage);
 if(gb_trouble_code){
@@ -1147,14 +1147,14 @@ ltab[0]= 1L<<max_height;
 stab[0]= n;
 
 /*:68*/
-#line 1410 "gb_basic.w"
+#line 1410 "./gb_basic.w"
 ;
 v= new_graph->vertices;
-if(ltab[0]>n){
+if(ltab[0]> n){
 k= 0;xtab[0]= n?1:0;
 while(1){
 /*69:*/
-#line 1439 "gb_basic.w"
+#line 1439 "./gb_basic.w"
 
 for(j= k+1;j<=d;j++){
 if(xtab[j-1]){
@@ -1171,10 +1171,10 @@ else xtab[j]= 1;
 }
 
 /*:69*/
-#line 1415 "gb_basic.w"
+#line 1415 "./gb_basic.w"
 ;
 /*71:*/
-#line 1476 "gb_basic.w"
+#line 1476 "./gb_basic.w"
 
 {register char*p= buffer;
 for(k= 0;k<=d;k++,p++)*p= (xtab[k]?'.':'x');
@@ -1184,10 +1184,10 @@ hash_in(v);
 }
 
 /*:71*/
-#line 1416 "gb_basic.w"
+#line 1416 "./gb_basic.w"
 ;
 /*72:*/
-#line 1492 "gb_basic.w"
+#line 1492 "./gb_basic.w"
 
 for(j= 0;j<d;j++)
 if(xtab[j]==1&&xtab[j+1]==1){
@@ -1202,29 +1202,29 @@ if(directed)gb_new_arc(v,u,1L);
 else gb_new_edge(v,u,1L);
 }
 }
-for(i--;i>j;i--)xtab[i+1]= xtab[i];
+for(i--;i> j;i--)xtab[i+1]= xtab[i];
 xtab[i+1]= 1;
 }
 
 /*:72*/
-#line 1417 "gb_basic.w"
+#line 1417 "./gb_basic.w"
 ;
 v++;
 /*70:*/
-#line 1458 "gb_basic.w"
+#line 1458 "./gb_basic.w"
 
 for(k= d-1;;k--){
 if(k<=0)goto last;
 if(xtab[k])break;
 }
 for(k--;;k--){
-if(xtab[k]==0&&ltab[k]>1)break;
+if(xtab[k]==0&&ltab[k]> 1)break;
 if(k==0)goto last;
 }
 xtab[k]++;
 
 /*:70*/
-#line 1420 "gb_basic.w"
+#line 1420 "./gb_basic.w"
 ;
 }
 }
@@ -1234,7 +1234,7 @@ panic(impossible);
 gb_free(working_storage);
 
 /*:67*/
-#line 1299 "gb_basic.w"
+#line 1299 "./gb_basic.w"
 ;
 if(gb_trouble_code){
 gb_recycle(new_graph);
@@ -1244,7 +1244,7 @@ return new_graph;
 }
 
 /*:64*//*74:*/
-#line 1544 "gb_basic.w"
+#line 1544 "./gb_basic.w"
 
 Graph*complement(g,copy,self,directed)
 Graph*g;
@@ -1252,7 +1252,7 @@ long copy;
 long self;
 long directed;
 {/*9:*/
-#line 198 "gb_basic.w"
+#line 198 "./gb_basic.w"
 
 Graph*new_graph;
 register long i,j,k;
@@ -1261,14 +1261,14 @@ register Vertex*v;
 register long s;
 
 /*:9*/
-#line 1550 "gb_basic.w"
+#line 1550 "./gb_basic.w"
 
 register long n;
 register Vertex*u;
 register siz_t delta;
 if(g==NULL)panic(missing_operand);
 /*75:*/
-#line 1575 "gb_basic.w"
+#line 1575 "./gb_basic.w"
 
 n= g->n;
 new_graph= gb_new_graph(n);
@@ -1279,12 +1279,12 @@ for(u= new_graph->vertices,v= g->vertices;v<g->vertices+n;u++,v++)
 u->name= gb_save_string(v->name);
 
 /*:75*/
-#line 1555 "gb_basic.w"
+#line 1555 "./gb_basic.w"
 ;
 sprintf(buffer,",%d,%d,%d)",copy?1:0,self?1:0,directed?1:0);
 make_compound_id(new_graph,"complement(",g,buffer);
 /*76:*/
-#line 1590 "gb_basic.w"
+#line 1590 "./gb_basic.w"
 
 for(v= g->vertices;v<g->vertices+n;v++){register Vertex*vv;
 u= vert_offset(v,delta);
@@ -1305,7 +1305,7 @@ gb_new_edge(u,vv,1L);
 for(v= new_graph->vertices;v<new_graph->vertices+n;v++)v->tmp= NULL;
 
 /*:76*/
-#line 1558 "gb_basic.w"
+#line 1558 "./gb_basic.w"
 ;
 if(gb_trouble_code){
 gb_recycle(new_graph);
@@ -1316,14 +1316,14 @@ return new_graph;
 }
 
 /*:74*//*78:*/
-#line 1641 "gb_basic.w"
+#line 1641 "./gb_basic.w"
 
 Graph*gunion(g,gg,multi,directed)
 Graph*g,*gg;
 long multi;
 long directed;
 {/*9:*/
-#line 198 "gb_basic.w"
+#line 198 "./gb_basic.w"
 
 Graph*new_graph;
 register long i,j,k;
@@ -1332,7 +1332,7 @@ register Vertex*v;
 register long s;
 
 /*:9*/
-#line 1646 "gb_basic.w"
+#line 1646 "./gb_basic.w"
 
 register long n;
 register Vertex*u;
@@ -1340,7 +1340,7 @@ register siz_t delta,ddelta;
 if(g==NULL||gg==NULL)panic(missing_operand);
 
 /*75:*/
-#line 1575 "gb_basic.w"
+#line 1575 "./gb_basic.w"
 
 n= g->n;
 new_graph= gb_new_graph(n);
@@ -1351,14 +1351,14 @@ for(u= new_graph->vertices,v= g->vertices;v<g->vertices+n;u++,v++)
 u->name= gb_save_string(v->name);
 
 /*:75*/
-#line 1652 "gb_basic.w"
+#line 1652 "./gb_basic.w"
 ;
 sprintf(buffer,",%d,%d)",multi?1:0,directed?1:0);
 make_double_compound_id(new_graph,"gunion(",g,",",gg,buffer);
 ddelta= ((siz_t)(new_graph->vertices))-
 ((siz_t)(gg->vertices));
 /*79:*/
-#line 1665 "gb_basic.w"
+#line 1665 "./gb_basic.w"
 
 for(v= g->vertices;v<g->vertices+n;v++){
 register Arc*a;
@@ -1369,7 +1369,7 @@ register Vertex*vvv= vert_offset(vv,-ddelta);
 for(a= v->arcs;a;a= a->next){
 u= vert_offset(a->tip,delta);
 /*80:*/
-#line 1700 "gb_basic.w"
+#line 1700 "./gb_basic.w"
 
 {register Arc*b;
 if(directed){
@@ -1393,14 +1393,14 @@ if(u==vv&&a->next==a+1)a++;
 }
 
 /*:80*/
-#line 1674 "gb_basic.w"
+#line 1674 "./gb_basic.w"
 ;
 }
 if(vvv<gg->vertices+gg->n)for(a= vvv->arcs;a;a= a->next){
 u= vert_offset(a->tip,ddelta);
 if(u<new_graph->vertices+n)
 /*80:*/
-#line 1700 "gb_basic.w"
+#line 1700 "./gb_basic.w"
 
 {register Arc*b;
 if(directed){
@@ -1424,7 +1424,7 @@ if(u==vv&&a->next==a+1)a++;
 }
 
 /*:80*/
-#line 1679 "gb_basic.w"
+#line 1679 "./gb_basic.w"
 ;
 }
 }
@@ -1432,7 +1432,7 @@ for(v= new_graph->vertices;v<new_graph->vertices+n;v++)
 v->tmp= NULL,v->tlen= NULL;
 
 /*:79*/
-#line 1657 "gb_basic.w"
+#line 1657 "./gb_basic.w"
 ;
 if(gb_trouble_code){
 gb_recycle(new_graph);
@@ -1442,14 +1442,14 @@ return new_graph;
 }
 
 /*:78*//*81:*/
-#line 1722 "gb_basic.w"
+#line 1722 "./gb_basic.w"
 
 Graph*intersection(g,gg,multi,directed)
 Graph*g,*gg;
 long multi;
 long directed;
 {/*9:*/
-#line 198 "gb_basic.w"
+#line 198 "./gb_basic.w"
 
 Graph*new_graph;
 register long i,j,k;
@@ -1458,14 +1458,14 @@ register Vertex*v;
 register long s;
 
 /*:9*/
-#line 1727 "gb_basic.w"
+#line 1727 "./gb_basic.w"
 
 register long n;
 register Vertex*u;
 register siz_t delta,ddelta;
 if(g==NULL||gg==NULL)panic(missing_operand);
 /*75:*/
-#line 1575 "gb_basic.w"
+#line 1575 "./gb_basic.w"
 
 n= g->n;
 new_graph= gb_new_graph(n);
@@ -1476,14 +1476,14 @@ for(u= new_graph->vertices,v= g->vertices;v<g->vertices+n;u++,v++)
 u->name= gb_save_string(v->name);
 
 /*:75*/
-#line 1732 "gb_basic.w"
+#line 1732 "./gb_basic.w"
 ;
 sprintf(buffer,",%d,%d)",multi?1:0,directed?1:0);
 make_double_compound_id(new_graph,"intersection(",g,",",gg,buffer);
 ddelta= ((siz_t)(new_graph->vertices))-
 ((siz_t)(gg->vertices));
 /*82:*/
-#line 1750 "gb_basic.w"
+#line 1750 "./gb_basic.w"
 
 for(v= g->vertices;v<g->vertices+n;v++){register Arc*a;
 register Vertex*vv= vert_offset(v,delta);
@@ -1492,7 +1492,7 @@ register Vertex*vvv= vert_offset(vv,-ddelta);
 
 if(vvv>=gg->vertices+gg->n)continue;
 /*85:*/
-#line 1796 "gb_basic.w"
+#line 1796 "./gb_basic.w"
 
 for(a= v->arcs;a;a= a->next){
 u= vert_offset(a->tip,delta);
@@ -1505,15 +1505,15 @@ if(u==vv&&!directed&&a->next==a+1)a++;
 }
 
 /*:85*/
-#line 1757 "gb_basic.w"
+#line 1757 "./gb_basic.w"
 ;
 for(a= vvv->arcs;a;a= a->next){
 u= vert_offset(a->tip,ddelta);
 if(u>=new_graph->vertices+n)continue;
 if(u->tmp==vv){long l= u->minlen;
-if(a->len>l)l= a->len;
+if(a->len> l)l= a->len;
 if(u->mult<0)/*84:*/
-#line 1788 "gb_basic.w"
+#line 1788 "./gb_basic.w"
 
 {register Arc*b= u->tlen;
 if(l<b->len){
@@ -1523,10 +1523,10 @@ if(!directed)(b+1)->len= l;
 }
 
 /*:84*/
-#line 1763 "gb_basic.w"
+#line 1763 "./gb_basic.w"
 
 else/*83:*/
-#line 1771 "gb_basic.w"
+#line 1771 "./gb_basic.w"
 
 {
 if(directed)gb_new_arc(vv,u,l);
@@ -1542,13 +1542,13 @@ else u->mult--;
 }
 
 /*:83*/
-#line 1765 "gb_basic.w"
+#line 1765 "./gb_basic.w"
 ;
 }
 }
 }
 /*86:*/
-#line 1807 "gb_basic.w"
+#line 1807 "./gb_basic.w"
 
 for(v= new_graph->vertices;v<new_graph->vertices+n;v++){
 v->tmp= NULL;
@@ -1558,11 +1558,11 @@ v->minlen= 0;
 }
 
 /*:86*/
-#line 1769 "gb_basic.w"
+#line 1769 "./gb_basic.w"
 ;
 
 /*:82*/
-#line 1737 "gb_basic.w"
+#line 1737 "./gb_basic.w"
 ;
 if(gb_trouble_code){
 gb_recycle(new_graph);
@@ -1572,13 +1572,13 @@ return new_graph;
 }
 
 /*:81*//*87:*/
-#line 1835 "gb_basic.w"
+#line 1835 "./gb_basic.w"
 
 Graph*lines(g,directed)
 Graph*g;
 long directed;
 {/*9:*/
-#line 198 "gb_basic.w"
+#line 198 "./gb_basic.w"
 
 Graph*new_graph;
 register long i,j,k;
@@ -1587,13 +1587,13 @@ register Vertex*v;
 register long s;
 
 /*:9*/
-#line 1839 "gb_basic.w"
+#line 1839 "./gb_basic.w"
 
 register long m;
 register Vertex*u;
 if(g==NULL)panic(missing_operand);
 /*89:*/
-#line 1890 "gb_basic.w"
+#line 1890 "./gb_basic.w"
 
 m= (directed?g->m:(g->m)/2);
 new_graph= gb_new_graph(m);
@@ -1610,7 +1610,7 @@ if(vv>=g->vertices+g->n)goto near_panic;
 
 }
 /*91:*/
-#line 1929 "gb_basic.w"
+#line 1929 "./gb_basic.w"
 
 u->u.V= v;
 u->v.V= vv;
@@ -1625,7 +1625,7 @@ directed?'>':'-',BUF_SIZE/2-1,vv->name);
 u->name= gb_save_string(buffer);
 
 /*:91*/
-#line 1905 "gb_basic.w"
+#line 1905 "./gb_basic.w"
 ;
 if(!mapped){
 u->map= v->map;
@@ -1639,10 +1639,10 @@ u++;
 if(u!=new_graph->vertices+m)goto near_panic;
 
 /*:89*/
-#line 1843 "gb_basic.w"
+#line 1843 "./gb_basic.w"
 ;
 if(directed)/*92:*/
-#line 1942 "gb_basic.w"
+#line 1942 "./gb_basic.w"
 
 for(u= new_graph->vertices;u<new_graph->vertices+m;u++){
 v= u->v.V;
@@ -1655,10 +1655,10 @@ v++;
 }
 
 /*:92*/
-#line 1844 "gb_basic.w"
+#line 1844 "./gb_basic.w"
 
 else/*93:*/
-#line 1961 "gb_basic.w"
+#line 1961 "./gb_basic.w"
 
 for(u= new_graph->vertices;u<new_graph->vertices+m;u++){register Vertex*vv;
 register Arc*a;register long mapped= 0;
@@ -1670,15 +1670,15 @@ vv= a->tip;
 if(vv<u&&vv>=new_graph->vertices)gb_new_edge(u,vv,1L);
 else if(vv>=v&&vv<g->vertices+g->n)mapped= 1;
 }
-if(mapped&&v>u->u.V)
+if(mapped&&v> u->u.V)
 for(vv= v->map;vv->u.V==v;vv++)gb_new_edge(u,vv,1L);
 }
 
 /*:93*/
-#line 1845 "gb_basic.w"
+#line 1845 "./gb_basic.w"
 ;
 /*88:*/
-#line 1875 "gb_basic.w"
+#line 1875 "./gb_basic.w"
 
 for(u= new_graph->vertices,v= NULL;u<new_graph->vertices+m;u++){
 if(u->u.V!=v){
@@ -1690,7 +1690,7 @@ if(!directed)((u->w.A)+1)->tip= v;
 }
 
 /*:88*/
-#line 1846 "gb_basic.w"
+#line 1846 "./gb_basic.w"
 ;
 if(gb_trouble_code){
 gb_recycle(new_graph);
@@ -1698,11 +1698,11 @@ panic(alloc_fault);
 }
 return new_graph;
 near_panic:/*90:*/
-#line 1917 "gb_basic.w"
+#line 1917 "./gb_basic.w"
 
 m= u-new_graph->vertices;
 /*88:*/
-#line 1875 "gb_basic.w"
+#line 1875 "./gb_basic.w"
 
 for(u= new_graph->vertices,v= NULL;u<new_graph->vertices+m;u++){
 if(u->u.V!=v){
@@ -1714,26 +1714,26 @@ if(!directed)((u->w.A)+1)->tip= v;
 }
 
 /*:88*/
-#line 1919 "gb_basic.w"
+#line 1919 "./gb_basic.w"
 ;
 gb_recycle(new_graph);
 panic(invalid_operand);
 
 
 /*:90*/
-#line 1852 "gb_basic.w"
+#line 1852 "./gb_basic.w"
 ;
 }
 
 /*:87*//*95:*/
-#line 2009 "gb_basic.w"
+#line 2009 "./gb_basic.w"
 
 Graph*product(g,gg,type,directed)
 Graph*g,*gg;
 long type;
 long directed;
 {/*9:*/
-#line 198 "gb_basic.w"
+#line 198 "./gb_basic.w"
 
 Graph*new_graph;
 register long i,j,k;
@@ -1742,16 +1742,16 @@ register Vertex*v;
 register long s;
 
 /*:9*/
-#line 2014 "gb_basic.w"
+#line 2014 "./gb_basic.w"
 
 register Vertex*u,*vv;
 register long n;
 if(g==NULL||gg==NULL)panic(missing_operand);
 /*96:*/
-#line 2036 "gb_basic.w"
+#line 2036 "./gb_basic.w"
 
 {float test_product= ((float)(g->n))*((float)(gg->n));
-if(test_product>MAX_NNN)panic(very_bad_specs);
+if(test_product> MAX_NNN)panic(very_bad_specs);
 }
 n= (g->n)*(gg->n);
 new_graph= gb_new_graph(n);
@@ -1767,10 +1767,10 @@ sprintf(buffer,",%d,%d)",(type?2:0)-(int)(type&1),directed?1:0);
 make_double_compound_id(new_graph,"product(",g,",",gg,buffer);
 
 /*:96*/
-#line 2018 "gb_basic.w"
+#line 2018 "./gb_basic.w"
 ;
 if((type&1)==0)/*97:*/
-#line 2053 "gb_basic.w"
+#line 2053 "./gb_basic.w"
 
 {register Vertex*uu,*uuu;
 register Arc*a;
@@ -1780,7 +1780,7 @@ for(u= gg->vertices;u<gg->vertices+gg->n;u++)
 for(a= u->arcs;a;a= a->next){
 v= a->tip;
 if(!directed){
-if(u>v)continue;
+if(u> v)continue;
 if(u==v&&a->next==a+1)a++;
 }
 for(uu= vert_offset(u,delta),vv= vert_offset(v,delta);
@@ -1789,14 +1789,14 @@ if(directed)gb_new_arc(uu,vv,a->len);
 else gb_new_edge(uu,vv,a->len);
 }
 /*98:*/
-#line 2073 "gb_basic.w"
+#line 2073 "./gb_basic.w"
 
 for(u= g->vertices,uu= new_graph->vertices;uu<new_graph->vertices+n;
 u++,uu+= gg->n)
 for(a= u->arcs;a;a= a->next){
 v= a->tip;
 if(!directed){
-if(u>v)continue;
+if(u> v)continue;
 if(u==v&&a->next==a+1)a++;
 }
 vv= new_graph->vertices+((gg->n)*(v-g->vertices));
@@ -1806,15 +1806,15 @@ else gb_new_edge(uuu,vv,a->len);
 }
 
 /*:98*/
-#line 2070 "gb_basic.w"
+#line 2070 "./gb_basic.w"
 ;
 }
 
 /*:97*/
-#line 2019 "gb_basic.w"
+#line 2019 "./gb_basic.w"
 ;
 if(type)/*99:*/
-#line 2088 "gb_basic.w"
+#line 2088 "./gb_basic.w"
 
 {Vertex*uu;Arc*a;
 siz_t delta0= 
@@ -1825,13 +1825,13 @@ for(uu= g->vertices,delta= delta0;uu<g->vertices+g->n;uu++,delta+= del)
 for(a= uu->arcs;a;a= a->next){
 vv= a->tip;
 if(!directed){
-if(uu>vv)continue;
+if(uu> vv)continue;
 if(uu==vv&&a->next==a+1)a++;
 }
 ddelta= delta0+del*(vv-g->vertices);
 for(u= gg->vertices;u<gg->vertices+gg->n;u++){register Arc*aa;
 for(aa= u->arcs;aa;aa= aa->next){long length= a->len;
-if(length>aa->len)length= aa->len;
+if(length> aa->len)length= aa->len;
 v= aa->tip;
 if(directed)
 gb_new_arc(vert_offset(u,delta),vert_offset(v,ddelta),length);
@@ -1843,7 +1843,7 @@ vert_offset(v,ddelta),length);
 }
 
 /*:99*/
-#line 2020 "gb_basic.w"
+#line 2020 "./gb_basic.w"
 ;
 if(gb_trouble_code){
 gb_recycle(new_graph);
@@ -1854,7 +1854,7 @@ return new_graph;
 }
 
 /*:95*//*105:*/
-#line 2247 "gb_basic.w"
+#line 2247 "./gb_basic.w"
 
 Graph*induced(g,description,self,multi,directed)
 Graph*g;
@@ -1863,7 +1863,7 @@ long self;
 long multi;
 long directed;
 {/*9:*/
-#line 198 "gb_basic.w"
+#line 198 "./gb_basic.w"
 
 Graph*new_graph;
 register long i,j,k;
@@ -1872,38 +1872,38 @@ register Vertex*v;
 register long s;
 
 /*:9*/
-#line 2254 "gb_basic.w"
+#line 2254 "./gb_basic.w"
 
 register Vertex*u;
 register long n= 0;
 register long nn= 0;
 if(g==NULL)panic(missing_operand);
 /*106:*/
-#line 2269 "gb_basic.w"
+#line 2269 "./gb_basic.w"
 
 /*107:*/
-#line 2279 "gb_basic.w"
+#line 2279 "./gb_basic.w"
 
 for(v= g->vertices;v<g->vertices+g->n;v++)
-if(v->ind>0){
-if(n>IND_GRAPH)panic(very_bad_specs);
+if(v->ind> 0){
+if(n> IND_GRAPH)panic(very_bad_specs);
 if(v->ind>=IND_GRAPH){
 if(v->subst==NULL)panic(missing_operand+1);
 
 n+= v->subst->n;
 }else n+= v->ind;
 }else if(v->ind<-nn)nn= -(v->ind);
-if(n>IND_GRAPH||nn>IND_GRAPH)panic(very_bad_specs+1);
+if(n> IND_GRAPH||nn> IND_GRAPH)panic(very_bad_specs+1);
 n+= nn;
 
 /*:107*/
-#line 2270 "gb_basic.w"
+#line 2270 "./gb_basic.w"
 ;
 new_graph= gb_new_graph(n);
 if(new_graph==NULL)
 panic(no_room);
 /*108:*/
-#line 2306 "gb_basic.w"
+#line 2306 "./gb_basic.w"
 
 for(k= 1,u= new_graph->vertices;k<=nn;k++,u++){
 u->mult= -k;
@@ -1912,7 +1912,7 @@ u->name= gb_save_string(buffer);
 }
 for(v= g->vertices;v<g->vertices+g->n;v++)
 if((k= v->ind)<0)v->map= (new_graph->vertices)-(k+1);
-else if(k>0){
+else if(k> 0){
 u->mult= k;
 v->map= u;
 if(k<=2){
@@ -1924,7 +1924,7 @@ u->name= gb_save_string(buffer);
 u++;
 }
 }else if(k>=IND_GRAPH)/*114:*/
-#line 2421 "gb_basic.w"
+#line 2421 "./gb_basic.w"
 
 {register Graph*gg= v->subst;
 register Vertex*vv= gg->vertices;
@@ -1937,7 +1937,7 @@ for(a= vv->arcs;a;a= a->next){register Vertex*vvv= a->tip;
 Vertex*uu= vert_offset(vvv,delta);
 if(vvv==vv&&!self)continue;
 if(uu->tmp==u&&!multi)/*113:*/
-#line 2409 "gb_basic.w"
+#line 2409 "./gb_basic.w"
 
 {register Arc*b= uu->tlen;
 if(a->len<b->len){
@@ -1948,7 +1948,7 @@ continue;
 }
 
 /*:113*/
-#line 2432 "gb_basic.w"
+#line 2432 "./gb_basic.w"
 ;
 if(!directed){
 if(vvv<vv)continue;
@@ -1962,7 +1962,7 @@ uu->tlen= ((directed||u<=uu)?u->arcs:uu->arcs);
 }
 
 /*:114*/
-#line 2325 "gb_basic.w"
+#line 2325 "./gb_basic.w"
 
 else for(j= 0;j<k;j++,u++){
 sprintf(buffer,"%.*s:%ld",BUF_SIZE-12,v->name,j);
@@ -1971,17 +1971,17 @@ u->name= gb_save_string(buffer);
 }
 
 /*:108*/
-#line 2274 "gb_basic.w"
+#line 2274 "./gb_basic.w"
 ;
 sprintf(buffer,",%s,%d,%d,%d)",description?description:null_string,
 self?1:0,multi?1:0,directed?1:0);
 make_compound_id(new_graph,"induced(",g,buffer);
 
 /*:106*/
-#line 2259 "gb_basic.w"
+#line 2259 "./gb_basic.w"
 ;
 /*110:*/
-#line 2355 "gb_basic.w"
+#line 2355 "./gb_basic.w"
 
 for(v= g->vertices;v<g->vertices+g->n;v++){
 u= v->map;
@@ -1992,16 +1992,16 @@ else if(k>=IND_GRAPH)k= v->subst->n;
 for(;k;k--,u++){
 if(!multi)
 /*111:*/
-#line 2391 "gb_basic.w"
+#line 2391 "./gb_basic.w"
 
 for(a= u->arcs;a;a= a->next){
 a->tip->tmp= u;
-if(directed||a->tip>u||a->next==a+1)a->tip->tlen= a;
+if(directed||a->tip> u||a->next==a+1)a->tip->tlen= a;
 else a->tip->tlen= a+1;
 }
 
 /*:111*/
-#line 2364 "gb_basic.w"
+#line 2364 "./gb_basic.w"
 ;
 for(a= v->arcs;a;a= a->next){
 vv= a->tip;
@@ -2018,13 +2018,13 @@ j= k,uu= u;
 }
 }
 /*112:*/
-#line 2398 "gb_basic.w"
+#line 2398 "./gb_basic.w"
 
 for(;j;j--,uu++){
 if(u==uu&&!self)continue;
 if(uu->tmp==u&&!multi)
 /*113:*/
-#line 2409 "gb_basic.w"
+#line 2409 "./gb_basic.w"
 
 {register Arc*b= uu->tlen;
 if(a->len<b->len){
@@ -2035,7 +2035,7 @@ continue;
 }
 
 /*:113*/
-#line 2402 "gb_basic.w"
+#line 2402 "./gb_basic.w"
 ;
 if(directed)gb_new_arc(u,uu,a->len);
 else gb_new_edge(u,uu,a->len);
@@ -2044,7 +2044,7 @@ uu->tlen= ((directed||u<=uu)?u->arcs:uu->arcs);
 }
 
 /*:112*/
-#line 2380 "gb_basic.w"
+#line 2380 "./gb_basic.w"
 ;
 }
 }
@@ -2052,10 +2052,10 @@ uu->tlen= ((directed||u<=uu)?u->arcs:uu->arcs);
 }
 
 /*:110*/
-#line 2260 "gb_basic.w"
+#line 2260 "./gb_basic.w"
 ;
 /*109:*/
-#line 2332 "gb_basic.w"
+#line 2332 "./gb_basic.w"
 
 for(v= g->vertices;v<g->vertices+g->n;v++)
 if(v->map)v->ind= v->map->mult;
@@ -2063,7 +2063,7 @@ for(v= new_graph->vertices;v<new_graph->vertices+n;v++)
 v->u.I= v->v.I= v->z.I= 0;
 
 /*:109*/
-#line 2261 "gb_basic.w"
+#line 2261 "./gb_basic.w"
 ;
 if(gb_trouble_code){
 gb_recycle(new_graph);
@@ -2073,10 +2073,10 @@ return new_graph;
 }
 
 /*:105*/
-#line 36 "gb_basic.w"
+#line 36 "./gb_basic.w"
 
 /*101:*/
-#line 2169 "gb_basic.w"
+#line 2169 "./gb_basic.w"
 
 Graph*bi_complete(n1,n2,directed)
 unsigned long n1;
@@ -2097,7 +2097,7 @@ return new_graph;
 }
 
 /*:101*//*103:*/
-#line 2222 "gb_basic.w"
+#line 2222 "./gb_basic.w"
 
 Graph*wheel(n,n1,directed)
 unsigned long n;
@@ -2120,7 +2120,7 @@ return new_graph;
 }
 
 /*:103*/
-#line 37 "gb_basic.w"
+#line 37 "./gb_basic.w"
 
 
 /*:2*/

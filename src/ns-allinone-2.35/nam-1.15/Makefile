@@ -49,17 +49,17 @@ CCOPT = -O2 -Wall -Wno-write-strings
 MKDEP = ./conf/mkdep
 # Have to be the same as that defined in conf/makefile.win
 TCL2C = ../tclcl-1.20/tcl2c++
-TCLSH = /home/ajeet/ns-allinone-2.35/bin/tclsh8.5
+TCLSH = /usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/bin/tclsh8.5
 
 #
 # Remember to add a dependency if you add any tcl sources here.
 #
 LIB =  \
-	-L/home/ajeet/ns-allinone-2.35/tclcl-1.20 -ltclcl -L/home/ajeet/ns-allinone-2.35/otcl-1.14 -lotcl -L/home/ajeet/ns-allinone-2.35/lib -ltk8.5 -L/home/ajeet/ns-allinone-2.35/lib -ltcl8.5 -L/home/ajeet/ns-allinone-2.35/zlib-1.2.3 -lz \
+	-L/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/tclcl-1.20 -ltclcl -L/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/otcl-1.14 -lotcl -L/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/lib -ltk8.5 -L/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/lib -ltcl8.5 -L/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/zlib-1.2.3 -lz \
 	-lXext -lX11 \
 	 -lnsl -ldl -lm 
 INCLUDE = \
-	-I. -I/home/ajeet/ns-allinone-2.35/tclcl-1.20 -I/home/ajeet/ns-allinone-2.35/otcl-1.14 -I/home/ajeet/ns-allinone-2.35/include -I/home/ajeet/ns-allinone-2.35/include -I/home/ajeet/ns-allinone-2.35/include -I/home/ajeet/ns-allinone-2.35/zlib-1.2.3 \
+	-I. -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/tclcl-1.20 -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/otcl-1.14 -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/include -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/include -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/include -I/usr/local/home/cse222a19/ucsdcse222a/group19/src/ns-allinone-2.35/zlib-1.2.3 \
 	 
 
 STATIC = 
