@@ -17,11 +17,12 @@ set switchAlg RED
 set lineRate 10Gb
 set inputLineRate 11Gb
 
-set DCTCP_ns_ 0.2
-set DCTCP_nl_ 0.8
-set DCTCP_g_ 0.0625
+set DCTCP_g_ [expr [lindex $argv 0]]
+set DCTCP_ns_ [expr [lindex $argv 1]]
+set DCTCP_nl_ [expr [lindex $argv 2]]
 set ackRatio 1 
 set packetSize 1460
+
  
 set traceSamplingInterval 0.0001
 set throughputSamplingInterval 0.01
@@ -89,6 +90,8 @@ if {$enableNAM != 0} {
 set mytracefile [open mytracefile.tr w]
 set throughputfile [open thrfile.tr w]
 set averagefile [open avgfile.tr w]
+
+puts $averagefile "$DCTCP_g_ $DCTCP_ns_ $DCTCP_nl_"
 
 proc finish {} {
         global ns enableNAM namfile mytracefile throughputfile averagefile
