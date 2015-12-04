@@ -2,6 +2,9 @@ set N 8
 set B 250
 set K 65
 set RTT 0.0001
+set q [expr [lindex $argv 3]]
+set s [expr [lindex $argv 4]]
+
 
 set simulationTime 1.0
 
@@ -153,7 +156,7 @@ proc throughputTrace {file} {
     }
 
     if {$now > $flowClassifyTime} { 
-	for {set i 5} {$i < [expr $N-1]} {incr i} {
+	for {set i 0} {$i < [expr $N-1]} {incr i} {
 	    $flowstats($i) instvar barrivals_
 	    puts -nonewline $file " [expr $barrivals_*8/$throughputSamplingInterval/1000000]"
 	    set total_bytes_arrived($i) [expr $total_bytes_arrived($i) + $barrivals_]
@@ -210,7 +213,7 @@ for {set i 0} {$i < $N} {incr i} {
 	set sink($i) [new Agent/TCPSink]
     }
     if {[string compare $sourceAlg "Sack"] == 0 || [string compare $sourceAlg "DC-TCP-Sack"] == 0} { 
-        if {$i < 5} {
+        if {$i < [expr $s + $q]} {
         set tcp($i) [new Agent/TCPX/FullTcpX/SackX]
 	      
         set sink($i) [new Agent/TCPX/FullTcpX/SackX]
@@ -246,9 +249,9 @@ $ru set max_ 1.0
 
 set s_counter 0
 proc short_flow {} {
-    global N ftp ns simulationTime short_flow_interval s_counter
+    global N ftp ns simulationTime short_flow_interval s_counter q s
     set now [$ns now]
-    for {set i 2} {$i < 5} {incr i} {
+    for {set i $q} {$i < [expr $s + $q]} {incr i} {
         $ns at [expr 0.05 + $s_counter * $short_flow_interval + $i * 0.005] "$ftp($i) send 512000"
     }
     incr s_counter
@@ -258,20 +261,20 @@ proc short_flow {} {
 
 set q_counter 0
 proc query_flow {} {
-    global N ftp ns simulationTime query_flow_interval q_counter
+    global N ftp ns simulationTime query_flow_interval q_counter q s 
     set now [$ns now]
-    for {set i 0} {$i < 2} {incr i} {
-        $ns at [expr 0.05 + $q_counter*$query_flow_interval + $i * 0.005] "$ftp($i) send 10240"
+    for {set i 0} {$i < $q} {incr i} {
+        $ns at [expr 0.05 + $q_counter*$query_flow_interval + $i * 0.005] "$ftp($i) send 2048"
     }
     incr q_counter
     $ns at [expr $now+$query_flow_interval] "query_flow"
 }
 
-for {set i 0} {$i < 5} {incr i} {
+for {set i 0} {$i < [expr $s + $q]} {incr i} {
     $ns at 0.0 "$ftp($i) send 10000"
 }
 
-for {set i 5} {$i < $N} {incr i} {
+for {set i [expr $s + $q]} {$i < $N} {incr i} {
     $ns at 0.0 "$ftp($i) send 10000"
     $ns at [expr $simulationTime * $i * 0.01] "$ftp($i) start"     
     $ns at [expr $simulationTime] "$ftp($i) stop"
