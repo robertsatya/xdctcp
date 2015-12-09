@@ -16,6 +16,7 @@ set stopMeasurementTime 1
 set flowClassifyTime 0.001
 
 set sourceAlg DC-TCP-Sack
+#set sourceAlg Newreno
 set switchAlg RED
 set lineRate 10Gb
 set inputLineRate 11Gb
