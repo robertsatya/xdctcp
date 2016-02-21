@@ -1,7 +1,6 @@
 xDCTCP - Extended DCTCP
 ========================
 ---
-##Contributors
-* Piyush Anil Nahar
-* Ajeet Kumar
-* Harsha Aduri
+Datacenter environment is a special subset of network where diverse set of applications with varied requirements run together. These applications generate  diverse mix of long and short flows, and require 3 things from the Datacenter networks: low latency for short flows, high throughput for long flows and high burst tolerance. DCTCP is a popular congestion control protocol used in the data center environment which tries to address these requirements. However, it treats long flows and short flows alike in the event of congestion and doesn't take into account the diverse nature of the traffic. 
+	
+In this project, we propose xDCTCP, an approach which improves upon DCTCP by differentiating between long flows and short flows in the event of congestion. The objective is to reduce the latency of short flows without compromising on the throughput of the longer flows. We try to compare our results with the original DCTCP and show how the latency can be reduced by tailoring our congestion control protocol based on flow length without adversely affecting the throughput and switch buffer occupancy.
